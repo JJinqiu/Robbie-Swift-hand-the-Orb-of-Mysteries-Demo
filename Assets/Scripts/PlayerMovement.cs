@@ -21,8 +21,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("状态")] public bool isCrouch;
     public bool isOnGround;
     public bool isJump;
+    public bool isHeadBlocked;
 
-    [Header("环境检测")] public LayerMask groundLayer;
+    [Header("环境检测")] public float footOffset = 0.4f;
+    public float headClearance = 0.5f;
+    public float groundDistance = 0.2f;
+
+    public LayerMask groundLayer;
 
     private float m_XVelocity;
 
@@ -75,18 +80,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void PhysicsCheck()
     {
-        if (m_Collider.IsTouchingLayers(groundLayer))
+        RaycastHit2D leftCheck = Raycast(new Vector2(-footOffset, 0f), Vector2.down, groundDistance, groundLayer);
+        RaycastHit2D rightCheck = Raycast(new Vector2(footOffset, 0f), Vector2.down, groundDistance, groundLayer);
+        if (leftCheck || rightCheck)
             isOnGround = true;
         else isOnGround = false;
+
+        RaycastHit2D headCheck = Raycast(new Vector2(0f, m_Collider.size.y), Vector2.up, headClearance, groundLayer);
+        isHeadBlocked = headCheck;
     }
 
     private void GroundMovement()
     {
         if (m_CrouchHeld && !isCrouch && isOnGround)
             Crouch();
-        else if (!m_CrouchHeld && isCrouch)
+        else if (!m_CrouchHeld && isCrouch && !isHeadBlocked)
             StandUp();
-        else if (!isOnGround && isCrouch) 
+        else if (!isOnGround && isCrouch)
             StandUp();
 
         m_XVelocity = Input.GetAxis("Horizontal"); // -1f~1f
@@ -106,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
                 StandUp();
                 m_Rb2d.AddForce(new Vector2(0f, crouchJumpBoost), ForceMode2D.Impulse);
             }
-            
+
             isOnGround = false;
             isJump = true;
 
@@ -143,5 +153,16 @@ public class PlayerMovement : MonoBehaviour
         isCrouch = false;
         m_Collider.size = m_ColliderStandSize;
         m_Collider.offset = m_ColliderStandOffset;
+    }
+
+    private RaycastHit2D Raycast(Vector2 offset, Vector2 rayDirection, float length, LayerMask layer)
+    {
+        Vector2 pos = transform.position;
+        var hit = Physics2D.Raycast(pos + offset, rayDirection, length, layer);
+        
+        var color = hit ? Color.red : Color.green;
+        
+        Debug.DrawRay(pos + offset, rayDirection * length, color);
+        return hit;
     }
 }

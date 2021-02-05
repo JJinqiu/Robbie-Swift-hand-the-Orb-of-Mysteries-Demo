@@ -15884,7 +15884,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588898708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.66, y: 2.2, z: 0}
+  m_LocalPosition: {x: 3.52, y: -1.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -15958,6 +15958,10 @@ MonoBehaviour:
   isCrouch: 0
   isOnGround: 0
   isJump: 0
+  isHeadBlocked: 0
+  footOffset: 0.4
+  headClearance: 0.5
+  groundDistance: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
