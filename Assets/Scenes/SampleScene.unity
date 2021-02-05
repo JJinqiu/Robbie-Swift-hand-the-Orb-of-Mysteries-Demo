@@ -198,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.62, y: 2.69, z: -10}
+  m_LocalPosition: {x: -7.4, y: 1.38, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -15884,7 +15884,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588898708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.52, y: -1.77, z: 0}
+  m_LocalPosition: {x: -8.74, y: -0.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -15914,7 +15914,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.8}
+  m_Size: {x: 0.8, y: 1.9}
   m_EdgeRadius: 0
 --- !u!50 &1588898712
 Rigidbody2D:
@@ -15955,13 +15955,18 @@ MonoBehaviour:
   jumpHoldForce: 1.9
   jumpHoldDuration: 0.1
   crouchJumpBoost: 2.5
+  hangingJumpForce: 15
   isCrouch: 0
   isOnGround: 0
   isJump: 0
   isHeadBlocked: 0
+  isHanging: 0
   footOffset: 0.4
   headClearance: 0.5
   groundDistance: 0.2
+  eyeHeight: 1.5
+  grabDistance: 0.4
+  reachOffset: 0.7
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
