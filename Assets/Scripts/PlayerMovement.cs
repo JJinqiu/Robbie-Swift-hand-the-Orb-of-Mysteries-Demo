@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     public LayerMask groundLayer;
 
-    private float m_XVelocity;
+    public float xVelocity;
 
     // 按键设置
     private bool m_JumpPressed;
@@ -132,11 +132,11 @@ public class PlayerMovement : MonoBehaviour
         else if (!isOnGround && isCrouch)
             StandUp();
 
-        m_XVelocity = Input.GetAxis("Horizontal"); // -1f~1f
+        xVelocity = Input.GetAxis("Horizontal"); // -1f~1f
         if (isCrouch)
-            m_XVelocity /= crouchSpeedDivisor;
+            xVelocity /= crouchSpeedDivisor;
 
-        m_Rb2d.velocity = new Vector2(m_XVelocity * speed, m_Rb2d.velocity.y);
+        m_Rb2d.velocity = new Vector2(xVelocity * speed, m_Rb2d.velocity.y);
         FlipDirection();
     }
 
@@ -184,9 +184,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FlipDirection()
     {
-        if (m_XVelocity < 0)
+        if (xVelocity < 0)
             transform.localScale = new Vector2(-1, 1);
-        if (m_XVelocity > 0)
+        if (xVelocity > 0)
             transform.localScale = new Vector2(1, 1);
     }
 
