@@ -172,6 +172,8 @@ public class PlayerMovement : MonoBehaviour
             m_JumpTime = Time.time + jumpHoldDuration;
 
             m_Rb2d.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            
+            AudioManager.PlayJumpAudio();
         }
         else if (isJump)
         {
@@ -185,9 +187,9 @@ public class PlayerMovement : MonoBehaviour
     private void FlipDirection()
     {
         if (xVelocity < 0)
-            transform.localScale = new Vector2(-1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
         if (xVelocity > 0)
-            transform.localScale = new Vector2(1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
     }
 
     private void Crouch()
