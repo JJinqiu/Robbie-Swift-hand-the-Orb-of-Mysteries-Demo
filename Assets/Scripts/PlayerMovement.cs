@@ -158,9 +158,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (m_JumpPressed && isOnGround && !isJump)
+        if (m_JumpPressed && isOnGround && !isJump && !isHeadBlocked)
         {
-            if (isOnGround && isCrouch && !isHeadBlocked)
+            if (isCrouch)
             {
                 StandUp();
                 m_Rb2d.AddForce(new Vector2(0f, crouchJumpBoost), ForceMode2D.Impulse);
