@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
     {
         _instance.m_IsGameOver = true;
         UIManager.DisplayGameOver();
+        AudioManager.PlayerWonAudio();
     }
 
     public static bool GameOver()
