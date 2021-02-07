@@ -11,10 +11,15 @@ public class AudioManager : MonoBehaviour
     [Header("环境声音")] public AudioClip ambientClip;
     public AudioClip musicClip;
 
+    [Header("FX音效")] public AudioClip deathFXClip;
+    
     [Header("Robbie音效")] public AudioClip[] walkStepClips;
     public AudioClip[] crouchStepClips;
     public AudioClip jumpClip;
+    public AudioClip deathClip;
     public AudioClip jumpVoiceClip;
+    public AudioClip deathVoiceClip;
+    
 
     private AudioSource m_AmbientSource;
     private AudioSource m_MusicSource;
@@ -68,5 +73,17 @@ public class AudioManager : MonoBehaviour
 
         _current.m_VoiceSource.clip = _current.jumpVoiceClip;
         _current.m_VoiceSource.Play();
+    }
+
+    public static void PlayDeathAudio()
+    {
+        _current.m_PlayerSource.clip = _current.deathClip;
+        _current.m_PlayerSource.Play();
+
+        _current.m_VoiceSource.clip = _current.deathVoiceClip;
+        _current.m_VoiceSource.Play();
+
+        _current.m_FxSource.clip = _current.deathFXClip;
+        _current.m_FxSource.Play();
     }
 }
