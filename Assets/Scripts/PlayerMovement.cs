@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (GameManager.GameOver()) return;
         if (Input.GetButtonDown("Jump"))
         {
             m_JumpPressed = true;
@@ -77,6 +78,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.GameOver())
+        {
+            m_Rb2d.velocity = new Vector2(0, 0);
+            return;
+        }
         if (!Input.GetButton("Jump"))
         {
             m_JumpPressed = false;
@@ -172,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
             m_JumpTime = Time.time + jumpHoldDuration;
 
             m_Rb2d.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-            
+
             AudioManager.PlayJumpAudio();
         }
         else if (isJump)

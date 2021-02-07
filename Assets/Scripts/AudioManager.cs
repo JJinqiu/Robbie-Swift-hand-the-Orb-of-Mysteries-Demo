@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("FX音效")] public AudioClip deathFXClip;
     public AudioClip orbFXClip;
+    public AudioClip doorFXClip;
 
     [Header("Robbie音效")] public AudioClip[] walkStepClips;
     public AudioClip[] crouchStepClips;
@@ -57,6 +58,12 @@ public class AudioManager : MonoBehaviour
         _current.m_MusicSource.clip = _current.musicClip;
         _current.m_MusicSource.loop = true;
         _current.m_MusicSource.Play();
+    }
+
+    public static void PlayDoorOpenAudio()
+    {
+        _current.m_FxSource.clip = _current.doorFXClip;
+        _current.m_FxSource.PlayDelayed(1f);
     }
 
     public static void PlayFootStepAudio()
