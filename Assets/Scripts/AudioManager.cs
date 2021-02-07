@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("FX音效")] public AudioClip deathFXClip;
     public AudioClip orbFXClip;
-    
+
     [Header("Robbie音效")] public AudioClip[] walkStepClips;
     public AudioClip[] crouchStepClips;
     public AudioClip jumpClip;
@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip jumpVoiceClip;
     public AudioClip deathVoiceClip;
     public AudioClip orbVoiceClip;
-    
+
 
     private AudioSource m_AmbientSource;
     private AudioSource m_MusicSource;
@@ -31,6 +31,12 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        if (_current != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         _current = this;
         DontDestroyOnLoad(gameObject);
         m_AmbientSource = gameObject.AddComponent<AudioSource>();
@@ -38,7 +44,7 @@ public class AudioManager : MonoBehaviour
         m_FxSource = gameObject.AddComponent<AudioSource>();
         m_PlayerSource = gameObject.AddComponent<AudioSource>();
         m_VoiceSource = gameObject.AddComponent<AudioSource>();
-        
+
         StartLevelAudio();
     }
 
@@ -51,9 +57,8 @@ public class AudioManager : MonoBehaviour
         _current.m_MusicSource.clip = _current.musicClip;
         _current.m_MusicSource.loop = true;
         _current.m_MusicSource.Play();
-        
     }
-    
+
     public static void PlayFootStepAudio()
     {
         var index = Random.Range(0, _current.walkStepClips.Length);
